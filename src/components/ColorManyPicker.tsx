@@ -47,7 +47,8 @@ export default function ColorManyPicker({ colors, onChecked, sx, ...other }: Pro
             key={color}
             size="small"
             value={color}
-            color="default"
+            // @ts-ignore
+            color={"default"}
             checked={onChecked(color)}
             icon={
               <IconColor

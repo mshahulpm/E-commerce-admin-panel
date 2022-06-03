@@ -23,7 +23,9 @@ export default function Page404() {
   return (
     <RootStyle title="404 Page Not Found | Minimal-UI">
       <Container>
-        <MotionContainer initial="initial" open>
+        <MotionContainer
+          // @ts-ignore
+          initial="initial" open>
           <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
             <motion.div variants={varBounceIn}>
               <Typography variant="h3" paragraph>

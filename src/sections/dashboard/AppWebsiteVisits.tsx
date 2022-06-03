@@ -53,7 +53,9 @@ export default function AppWebsiteVisits() {
     <Card>
       <CardHeader title="Yearly Sales Summary" subheader="(+43%) than last year" />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
-        <ReactApexChart type="line" series={CHART_DATA} options={chartOptions} height={364} />
+        <ReactApexChart type="line" series={CHART_DATA}
+          // @ts-ignore
+          options={chartOptions} height={364} />
       </Box>
     </Card>
   );

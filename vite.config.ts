@@ -6,7 +6,7 @@ const path = require('path')
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: process.env.PORT ? parseInt(process.env.PORT) : 4000,
+    port: 4000,
   },
   resolve: {
     alias: [{

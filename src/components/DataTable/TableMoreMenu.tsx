@@ -26,6 +26,7 @@ export default function TableMoreMenu({ actions, open, onClose, onOpen }: Props)
         onClose={onClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        // @ts-ignore
         arrow="right-top"
         sx={{
           mt: -1,

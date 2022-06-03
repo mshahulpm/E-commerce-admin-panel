@@ -142,6 +142,7 @@ export default function ShopFilterSidebar({
                     Colors
                   </Typography>
                   <ColorManyPicker
+                    // @ts-ignore
                     name="colors"
                     colors={FILTER_COLOR_OPTIONS}
                     onChange={handleChange}

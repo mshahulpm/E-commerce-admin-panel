@@ -15,7 +15,7 @@ const SORT_BY_OPTIONS = [
 
 export default function ShopProductSort() {
   const [open, setOpen] = useState(null);
-
+  // @ts-ignore
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
