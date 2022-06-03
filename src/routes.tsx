@@ -5,10 +5,15 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import Login from './pages/Login';
 import Register from './pages/Register';
-import DashboardApp from './pages/DashboardApp';
+import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
-import Blog from './pages/Blog';
+import Category from './pages/Category';
+import Order from './pages/Order';
 import User from './pages/User';
+import Asset from './pages/Asset';
+import Marketing from './pages/Marketing';
+import Settings from './pages/Settings';
+import Blog from './pages/Blog';
 import NotFound from './pages/Page404';
 
 // ----------------------------------------------------------------------
@@ -19,9 +24,14 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <User /> },
+        { path: 'app', element: <Dashboard /> },
         { path: 'products', element: <Products /> },
+        { path: 'category', element: <Category /> },
+        { path: 'orders', element: <Order /> },
+        { path: 'user', element: <User /> },
+        { path: 'assets', element: <Asset /> },
+        { path: 'marketing', element: <Marketing /> },
+        { path: 'settings', element: <Settings /> },
         { path: 'blog', element: <Blog /> }
       ]
     },

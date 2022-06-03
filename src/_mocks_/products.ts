@@ -1,4 +1,5 @@
 // utils
+import { fCurrency } from 'src/utils/formatNumber';
 import { mockImgProduct } from '../utils/mockImages';
 
 // ----------------------------------------------------------------------
@@ -49,7 +50,7 @@ const products = [...Array(24)].map((_, index) => {
     id: 'id_' + index,
     cover: mockImgProduct(setIndex),
     name: PRODUCT_NAME[index],
-    price,
+    price: fCurrency(price),
     priceSale: setIndex % 3 ? null : price - 10,
     colors:
       (setIndex === 1 && PRODUCT_COLOR.slice(0, 2)) ||
@@ -60,6 +61,8 @@ const products = [...Array(24)].map((_, index) => {
       (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
       PRODUCT_COLOR,
     status: ['sale', 'new', '', ''][setIndex % 4],
+    stock: Math.floor(price),
+    categories: ['one', 'two'],
   };
 });
 

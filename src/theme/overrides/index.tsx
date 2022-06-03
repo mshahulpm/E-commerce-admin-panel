@@ -1,4 +1,5 @@
 import { Theme } from '@mui/material/styles'
+import { merge } from 'lodash'
 
 import Card from './Card';
 import Lists from './Lists';
@@ -14,16 +15,16 @@ import Autocomplete from './Autocomplete';
 // ----------------------------------------------------------------------
 
 export default function ComponentsOverrides(theme: Theme) {
-  return {
-    ...Card(theme),
-    ...Lists(theme),
-    ...Paper(theme),
-    ...Input(theme),
-    ...Button(theme),
-    ...Tooltip(theme),
-    ...Backdrop(theme),
-    ...Typography(theme),
-    ...IconButton(theme),
-    ...Autocomplete(theme)
-  };
+  return merge(
+    Card(theme),
+    Lists(theme),
+    Paper(theme),
+    Input(theme),
+    Button(theme),
+    Tooltip(theme),
+    Backdrop(theme),
+    Typography(theme),
+    IconButton(theme),
+    Autocomplete(theme)
+  );
 }

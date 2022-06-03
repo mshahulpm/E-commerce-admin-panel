@@ -98,6 +98,6 @@ const typography = {
     fontSize: pxToRem(14),
     textTransform: 'capitalize'
   }
-};
+} as const;
 
 export default typography;

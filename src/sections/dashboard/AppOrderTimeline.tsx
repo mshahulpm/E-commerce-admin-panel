@@ -9,7 +9,7 @@ import {
   TimelineDot
 } from '@mui/lab';
 // utils
-import { fDateTime } from '../../../utils/formatTime';
+import { fDateTime } from '../../utils/formatTime';
 
 // ----------------------------------------------------------------------
 

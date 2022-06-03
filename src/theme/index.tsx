@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from 'react';
 // material
 import { CssBaseline } from '@mui/material';
-import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme, StyledEngineProvider, ThemeOptions } from '@mui/material/styles';
 //
 import palette from './palette';
 import typography from './typography';
@@ -11,7 +11,7 @@ import shadows, { customShadows } from './shadows';
 // ----------------------------------------------------------------------
 
 export default function ThemeConfig({ children }: { children: ReactNode }) {
-  const themeOptions = useMemo(
+  const themeOptions: ThemeOptions = useMemo(
     () => ({
       palette,
       shape: { borderRadius: 8 },

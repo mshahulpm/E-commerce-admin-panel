@@ -543,6 +543,11 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.179.tgz#490ec3288088c91295780237d2497a3aa9dfb5c5"
   integrity sha512-uwc1x90yCKqGcIOAT6DwOSuxnrAbpkdPsUOZtwrXb4D/6wZs+6qG7QnIawDuZWg0sWpxl+ltIKCaLoMlna678w==
 
+"@types/node@^17.0.35":
+  version "17.0.35"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.35.tgz#635b7586086d51fb40de0a2ec9d1014a5283ba4a"
+  integrity sha512-vu1SrqBjbbZ3J6vwY17jBs8Sr/BKA+/a/WtjRG+whKg1iuLFOosq872EXS0eXWILdO36DHQQeku/ZcL6hz2fpg==
+
 "@types/numeral@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@types/numeral/-/numeral-2.0.2.tgz#8ea2c4f4e64c0cc948ad7da375f6f827778a7912"
