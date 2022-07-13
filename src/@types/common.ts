@@ -16,3 +16,11 @@ export type RejectedImage = {
     url: string,
     error: string
 }
+
+
+export type User = {
+    email: string
+    name: string
+    roles: "ADMIN" | "USER" | "SUB_ADMIN"
+    userId: string
+}

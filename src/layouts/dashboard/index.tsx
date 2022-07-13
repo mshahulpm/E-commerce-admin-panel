@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+import AuthGuard from 'src/guards/AuthGuard';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function DashboardLayout() {
+function Layout() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,4 +45,14 @@ export default function DashboardLayout() {
       </MainStyle>
     </RootStyle>
   );
+}
+
+
+export default function DashboardLayout() {
+
+  return (
+    <AuthGuard>
+      <Layout />
+    </AuthGuard>
+  )
 }
