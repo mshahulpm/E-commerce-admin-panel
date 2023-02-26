@@ -6,7 +6,7 @@ const day = 24 * hour
 const week = 7 * day
 
 
-export const _time = {
+export const TIME = {
     second,
     minute,
     hour,

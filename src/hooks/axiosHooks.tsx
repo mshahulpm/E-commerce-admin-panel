@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { useEffect, useMemo, useState } from "react";
-import axios from 'src/services/_axios'
+import axios from 'axios'
 
 
 type stateType = {

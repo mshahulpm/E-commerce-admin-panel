@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,58 +13,71 @@ import Iconify from 'src/components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from 'src/components/hook-form';
 import { useAuth } from 'src/context/AuthContext';
 import { useAxiosMutation } from 'src/hooks/axiosHooks';
+import { useMutation } from '@apollo/client';
+import { LOGIN_MUTATION } from 'src/graphql/mutation';
+import { setToken } from 'src/services/Token';
 
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  email: string;
+  username: string;
   password: string;
   remember: boolean;
   afterSubmit?: string;
 };
 
+const LoginSchema = Yup.object().shape({
+  username: Yup.string().required('Email/phone is required'),
+  password: Yup.string().required('Password is required'),
+});
+
+const defaultValues = {
+  username: 'admin@gmail.com',
+  password: 'password',
+};
+
+
 export default function LoginForm() {
 
 
-  const { login } = useAuth();
-  const [loginMutation, { error, loading }] = useAxiosMutation()
+  const { authorizeUser } = useAuth()
+  const navigate = useNavigate()
+  const [loginMutation, { error, loading }] = useMutation(LOGIN_MUTATION)
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
-  });
-
-  const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
-  };
 
   const methods = useForm<FormValuesProps>({
     resolver: yupResolver(LoginSchema),
     defaultValues,
   });
 
-  const { handleSubmit } = methods;
 
   const onSubmit = async (values: FormValuesProps) => {
     try {
-      const res = await loginMutation('/auth/login', { data: values })
-      // @ts-ignore
-      login(res.accessToken)
+      const res = await loginMutation({
+        variables: {
+          login: {
+            username: values.username,
+            password: values.password
+          }
+        }
+      })
+      setToken(res.data.login.token)
+      authorizeUser(res.data.login.user)
+      navigate('/')
+
     } catch (error) {
     }
   };
 
   return (
-    <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+    <FormProvider methods={methods} onSubmit={methods.handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         {error && <Alert
           sx={{ color: '#e63b25', fontWeight: 'bold', background: '#f5d1c1' }}
-          severity="error">{error.data?.message}</Alert>}
+          severity="error">{error.message}</Alert>}
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name="username" label="Email address" />
 
         <RHFTextField
           name="password"
@@ -83,7 +96,6 @@ export default function LoginForm() {
       </Stack>
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 4 }}>
-        {/* <RHFCheckbox name="remember" label="Remember me" /> */}
         <div></div>
         <Link component={RouterLink} variant="subtitle2" to={'/reset-password'}>
           Forgot password?

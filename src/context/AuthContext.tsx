@@ -1,18 +1,15 @@
-import { previousDay } from "date-fns";
-import { createContext, ReactNode, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { User } from "src/@types/common";
-import { deleteAuthToken, getAuthDetails, setToken } from "src/services/Token";
+import { getAuthToken } from "src/services/Token";
 
 type StateType = {
     isAuthorized: boolean
-    user: User | null
+    user?: User | null
 }
 
-
 interface authContextType extends StateType {
-    login: (token: string,) => void
-    logout: VoidFunction
+    removeAuthUser: () => any,
+    authorizeUser: (user?: User) => any
 }
 
 
@@ -23,30 +20,27 @@ type authProviderProps = {
 }
 export function AuthProvider({ children }: authProviderProps) {
 
-    const navigate = useNavigate()
 
-    const [state, setState] = useState<StateType>(getAuthDetails())
+    const [state, setState] = useState<StateType>({
+        isAuthorized: !!getAuthToken()
+    })
+    const removeAuthUser = () => setState({ isAuthorized: false })
+    const authorizeUser = (user?: User) => setState({
+        isAuthorized: true,
+        user
+    })
 
-    const login = (token: string,) => {
-        setToken(token)
-        setState(prev => ({
-            ...prev,
-            ...getAuthDetails(token)
-        }))
-        navigate('/')
-    }
+    useEffect(() => {
+        // need to do api call to fetch user details 
 
-    const logout = () => {
-        deleteAuthToken()
-        setState(prev => ({ ...prev, isAuthorized: false, user: null }))
-        navigate('/login')
-    }
+    }, [])
+
 
     return (
         <AuthContext.Provider value={{
             ...state,
-            login,
-            logout
+            removeAuthUser,
+            authorizeUser
         }}>
             {children}
         </AuthContext.Provider>
