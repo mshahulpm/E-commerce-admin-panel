@@ -1,13 +1,9 @@
-import { AcceptedImage, RejectedImage } from "src/@types/common"
+import { AcceptedImage, ImageConfig, RejectedImage } from "src/@types/common"
 
 
 type validateImageArg = {
     files: File[],
-    imageConfig: {
-        height: number,
-        width: number,
-        size: number
-    },
+    imageConfig?: ImageConfig,
     callBack: (accepted: AcceptedImage[], rejected: RejectedImage[]) => void
 }
 
@@ -24,7 +20,7 @@ export function validateImage({
         const image = new Image()
         const url = URL.createObjectURL(file)
 
-        if (file.size > imageConfig.size) {
+        if (imageConfig?.size && file.size > imageConfig.size) {
             rejected.push({ file, error: 'Image Size exceeded', url })
             return
         }
@@ -37,12 +33,12 @@ export function validateImage({
 
         image.onload = function () {
 
-            if (image.height !== imageConfig.height) {
+            if (imageConfig?.height && image.height !== imageConfig.height) {
                 rejected.push({ file, error: 'Invalid Image height', url })
                 return handleFinish()
             }
 
-            if (image.width !== imageConfig.width) {
+            if (imageConfig?.width && image.width !== imageConfig.width) {
                 rejected.push({ file, error: 'Invalid Image height', url })
                 return handleFinish()
             }
@@ -53,4 +49,14 @@ export function validateImage({
 
         image.src = url
     })
+}
+
+
+export function omitEmpty(obj: any) {
+
+    let res = {} as any
+    Object.entries(obj).forEach(([key, value]) => {
+        if (value) res[key] = value
+    })
+    return res
 }

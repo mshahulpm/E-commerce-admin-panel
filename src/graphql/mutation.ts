@@ -15,3 +15,11 @@ mutation($login: LoginInput!){
   }
 }
 `
+
+export const CREATE_PRODUCT_MUTATION = gql`
+mutation($createProductInput: CreateProductInput!){
+  createProduct(createProductInput: $createProductInput) {
+    id
+  }
+}
+`

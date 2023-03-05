@@ -20,18 +20,22 @@ import { _TableHead } from 'src/@types/common'
 
 
 
-type props = {
+export type DataTableProps = {
     tableHead: _TableHead[],
-    dataSource?: (
+    dataSource?: (args: {
         search: string,
         limit: number,
         page: number,
         filter?: {
             [key: string]: any
         }
-    ) => Promise<{
-        data: any[],
-        count: number,
+    }) => Promise<{
+        docs: any[],
+        last_page: number
+        limit: number
+        offset: number
+        page: number
+        totalDocs: number
     }>,
     demoData?: any[],
     containerProps?: SxProps,
@@ -49,7 +53,7 @@ export default function DataTable({
     containerProps,
     Filter,
     tabNavValues
-}: props) {
+}: DataTableProps) {
 
 
     const [data, setData] = useState<any[]>(demoData || [])
@@ -66,10 +70,15 @@ export default function DataTable({
     useEffect(() => {
         if (!dataSource) return
         setLoading(true)
-        dataSource(search, page + 1, limit, filter)
+        dataSource({
+            search,
+            page: page + 1,
+            limit,
+            filter
+        })
             .then((data) => {
-                setData(data.data)
-                setCount(data.count)
+                setData(data.docs)
+                setCount(data.totalDocs)
                 setLoading(false)
             })
             .catch((err) => {
@@ -135,8 +144,8 @@ export default function DataTable({
                                     <TableSkeleton noOfRows={4} /> :
                                     <>
                                         {
-                                            data.length > 0 ?
-                                                data.map((row, index) => (
+                                            data?.length > 0 ?
+                                                data?.map((row, index) => (
                                                     <TableRow key={'id_1' + index}>
                                                         {tableHead.map((head, ind) => (
                                                             <TableCell key={'id_2' + index + ind}>

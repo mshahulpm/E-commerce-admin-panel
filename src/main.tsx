@@ -1,5 +1,9 @@
 // scroll bar
 import 'simplebar/src/simplebar.css';
+import './index.css'
+
+// react toastify 
+import 'react-toastify/dist/ReactToastify.css';
 
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';

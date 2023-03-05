@@ -24,3 +24,10 @@ export type User = {
     roles: "ADMIN" | "USER" | "SUB_ADMIN"
     userId: string
 }
+
+
+export type ImageConfig = {
+    width?: number,
+    height?: number,
+    size?: number,
+}

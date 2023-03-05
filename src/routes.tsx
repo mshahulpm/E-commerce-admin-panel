@@ -6,7 +6,10 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+
 import Products from './pages/Products';
+import CreateProduct from './pages/create-product';
+
 import Category from './pages/Category';
 import Order from './pages/Order';
 import User from './pages/User';
@@ -26,6 +29,7 @@ export default function Router() {
       children: [
         { path: 'app', element: <Dashboard /> },
         { path: 'products', element: <Products /> },
+        { path: 'products/create', element: <CreateProduct /> },
         { path: 'category', element: <Category /> },
         { path: 'orders', element: <Order /> },
         { path: 'user', element: <User /> },
