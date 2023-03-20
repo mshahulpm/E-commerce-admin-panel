@@ -66,6 +66,7 @@ export default function ProductForm() {
                 }
             })
             toast.success('Product Added')
+            methods.reset({})
         } catch (error: any) {
             toast.error(error?.response?.data?.message || error.message)
         }
